@@ -10,5 +10,6 @@
 #define BridgingHeader_h
 
 #import "Spark-SDK.h"
+#import "WaterclosetwizardKeys.h"
 
 #endif /* BridgingHeader_h */
