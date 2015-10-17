@@ -8,8 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-#import "WCWRoomTableViewCell.h"
-#import "WCWRoomEvent.h"
+#import "WaterClosetWizard-Swift.h"
 
 #import "SparkCloud.h"
 
