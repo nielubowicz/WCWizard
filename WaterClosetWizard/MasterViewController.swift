@@ -13,11 +13,6 @@ class MasterViewController : UITableViewController {
     var objects : Array = Array<WCWRoomEvent>()
     let kWCWEventPrefix : String = "Bathroom"
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    }
-    
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
@@ -66,10 +61,17 @@ class MasterViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.objects.count <= 0) {
+            return 1;
+        }
+        
         return self.objects.count;
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (self.objects.count <= 0) {
+            return tableView.dequeueReusableCellWithIdentifier("noWizardsCell")!
+        }
         
         let cell : WCWRoomTableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! WCWRoomTableViewCell
     
