@@ -11,6 +11,5 @@
 
 #import "Spark-SDK.h"
 #import "WaterclosetwizardKeys.h"
-#import "DetailViewController.h"
 
 #endif /* BridgingHeader_h */

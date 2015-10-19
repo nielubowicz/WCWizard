@@ -13,17 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     var window: UIWindow?
     
-    
     // MARK: UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let splitViewController : UISplitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController : UINavigationController = splitViewController.viewControllers.last as! UINavigationController
+        let splitViewController = window!.rootViewController as! UISplitViewController
+        let navigationController = splitViewController.viewControllers.last as! UINavigationController
         navigationController.topViewController?.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
         
-        let keys : WaterclosetwizardKeys = WaterclosetwizardKeys.init()
+        let keys : WaterclosetwizardKeys = WaterclosetwizardKeys()
         SparkCloud.sharedInstance().OAuthClientId = keys.oAuthClientId()
         SparkCloud.sharedInstance().OAuthClientSecret = keys.oAuthSecret()
         
