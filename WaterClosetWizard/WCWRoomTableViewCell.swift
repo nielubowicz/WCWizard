@@ -13,28 +13,20 @@ import UIKit
 public class WCWRoomTableViewCell : UITableViewCell {
     var isOccupied : Bool = false {
         didSet {
-            if (self.accessoryView == nil) {
-                let accessoryView : UIView = UIView.init(frame:CGRectMake(0, 0, 44, 44));
-                accessoryView.layer.cornerRadius = 22;
-                self.accessoryView = accessoryView;
+            if (accessoryView == nil) {
+                let accessoryView : UIView = UIView(frame:CGRectMake(0, 0, 44, 44))
+                accessoryView.layer.cornerRadius = 22
+                self.accessoryView = accessoryView
             }
             
-            var backgroundColor : UIColor
-            if (self.isOccupied) {
+            let backgroundColor : UIColor
+            if (isOccupied) {
                 backgroundColor = UIColor.redColor()
             } else {
                 backgroundColor = UIColor.greenColor()
             }
-            self.accessoryView?.backgroundColor = backgroundColor
-            self.setNeedsDisplay()
+            accessoryView?.backgroundColor = backgroundColor
+            setNeedsDisplay()
         }
-    }
-    
-    init() {
-        super.init(style: UITableViewCellStyle.Default, reuseIdentifier: "RoomTableViewCell")
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 }

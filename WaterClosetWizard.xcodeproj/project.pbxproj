@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		085E0DE11BCF46CD007AB038 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085E0DE01BCF46CD007AB038 /* main.swift */; };
-		085E0DEA1BCF46CD007AB038 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085E0DE91BCF46CD007AB038 /* DetailViewController.m */; };
 		085E0DED1BCF46CD007AB038 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085E0DEB1BCF46CD007AB038 /* Main.storyboard */; };
 		085E0DEF1BCF46CD007AB038 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 085E0DEE1BCF46CD007AB038 /* Assets.xcassets */; };
 		085E0DF21BCF46CD007AB038 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085E0DF01BCF46CD007AB038 /* LaunchScreen.storyboard */; };
@@ -35,8 +34,6 @@
 		075E82510A03F13845CF2C2B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		085E0DDC1BCF46CD007AB038 /* WaterClosetWizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterClosetWizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		085E0DE01BCF46CD007AB038 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		085E0DE81BCF46CD007AB038 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		085E0DE91BCF46CD007AB038 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		085E0DEC1BCF46CD007AB038 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		085E0DEE1BCF46CD007AB038 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		085E0DF11BCF46CD007AB038 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +95,6 @@
 			children = (
 				08951E111BD2EB070096B4CE /* AppDelegate.swift */,
 				08951E0F1BD2E4260096B4CE /* MasterViewController.swift */,
-				085E0DE81BCF46CD007AB038 /* DetailViewController.h */,
-				085E0DE91BCF46CD007AB038 /* DetailViewController.m */,
 				088234F61BD065B3007A5F47 /* WCWRoomEvent.swift */,
 				088234F91BD06C8C007A5F47 /* WCWRoomTableViewCell.swift */,
 				085E0DEB1BCF46CD007AB038 /* Main.storyboard */,
@@ -304,7 +299,6 @@
 				08951E121BD2EB070096B4CE /* AppDelegate.swift in Sources */,
 				088234F71BD065B3007A5F47 /* WCWRoomEvent.swift in Sources */,
 				085E0DE11BCF46CD007AB038 /* main.swift in Sources */,
-				085E0DEA1BCF46CD007AB038 /* DetailViewController.m in Sources */,
 				08951E101BD2E4260096B4CE /* MasterViewController.swift in Sources */,
 				088234FA1BD06C8C007A5F47 /* WCWRoomTableViewCell.swift in Sources */,
 			);
