@@ -8,8 +8,6 @@
 
 import UIKit
 
-@objc(WCWRoomTableViewCell)
-
 public class WCWRoomTableViewCell : UITableViewCell {
     var isOccupied : Bool = false {
         didSet {
