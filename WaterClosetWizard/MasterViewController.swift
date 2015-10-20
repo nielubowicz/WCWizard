@@ -21,7 +21,7 @@ class MasterViewController : UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        SparkCloud.sharedInstance().subscribeToAllEventsWithPrefix(kWCWEventPrefix) { (event : SparkEvent!, error : NSError!) -> Void in
+        SparkCloud.sharedInstance().subscribeToAllEventsWithPrefix(kWCWEventPrefix) { (event, error) in
             if (error != nil) {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     let roomEvent : WCWRoomEvent = WCWRoomEvent.init(sparkEvent: event)
@@ -61,7 +61,7 @@ class MasterViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (objects.count <= 0) {
+        if (objects.isEmpty) {
             return 1;
         }
         

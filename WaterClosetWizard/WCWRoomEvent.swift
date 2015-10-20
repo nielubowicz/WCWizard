@@ -8,8 +8,6 @@
 
 import Foundation
 
-@objc(WCWRoomEvent)
-
 class WCWRoomEvent : NSObject {
     var roomOccupied : Bool
     var roomLocation : String
