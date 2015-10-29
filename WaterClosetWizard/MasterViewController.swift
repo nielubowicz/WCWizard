@@ -11,7 +11,7 @@ import UIKit
 class MasterViewController : UITableViewController {
     
     var objects = [WCWRoomEvent]()
-    let kWCWEventPrefix = "Bathroom"
+    let kWCWEventPrefix = "occupancy-change"
 
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
@@ -22,9 +22,9 @@ class MasterViewController : UITableViewController {
         super.viewDidAppear(animated)
 
         SparkCloud.sharedInstance().subscribeToAllEventsWithPrefix(kWCWEventPrefix) { (event, error) in
-            if (error != nil) {
+            if (error == nil) {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    let roomEvent : WCWRoomEvent = WCWRoomEvent.init(sparkEvent: event)
+                    let roomEvent : WCWRoomEvent = WCWRoomEvent(sparkEvent: event)
                     if (self.objects.contains(roomEvent)) {
                         self.updateObject(roomEvent)
                     } else {
