@@ -18,6 +18,8 @@
 		08951E101BD2E4260096B4CE /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08951E0F1BD2E4260096B4CE /* MasterViewController.swift */; };
 		08951E121BD2EB070096B4CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08951E111BD2EB070096B4CE /* AppDelegate.swift */; };
 		08B65D111BF0454500BCEDD0 /* DeviceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65D101BF0454500BCEDD0 /* DeviceDataSource.swift */; };
+		08C932E71BF141E4008F8E4E /* SparkCloud+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C932E61BF141E4008F8E4E /* SparkCloud+Extensions.swift */; };
+		08C932E91BF14209008F8E4E /* EventPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C932E81BF14209008F8E4E /* EventPrefix.swift */; };
 		D2D61D31ECF3D260A037AFBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 075E82510A03F13845CF2C2B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		08951E0F1BD2E4260096B4CE /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		08951E111BD2EB070096B4CE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08B65D101BF0454500BCEDD0 /* DeviceDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataSource.swift; sourceTree = "<group>"; };
+		08C932E61BF141E4008F8E4E /* SparkCloud+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SparkCloud+Extensions.swift"; sourceTree = "<group>"; };
+		08C932E81BF14209008F8E4E /* EventPrefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPrefix.swift; sourceTree = "<group>"; };
 		7D9514ADCDEC39897B314869 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9C8F5CD3DD885C02BDC97E1B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +110,8 @@
 				085E0DF31BCF46CD007AB038 /* Info.plist */,
 				085E0DDF1BCF46CD007AB038 /* Supporting Files */,
 				088234F81BD06791007A5F47 /* BridgingHeader.h */,
+				08C932E61BF141E4008F8E4E /* SparkCloud+Extensions.swift */,
+				08C932E81BF14209008F8E4E /* EventPrefix.swift */,
 			);
 			path = WaterClosetWizard;
 			sourceTree = "<group>";
@@ -299,9 +305,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C932E71BF141E4008F8E4E /* SparkCloud+Extensions.swift in Sources */,
 				08951E121BD2EB070096B4CE /* AppDelegate.swift in Sources */,
 				088234F71BD065B3007A5F47 /* WCWRoomEvent.swift in Sources */,
 				08B65D111BF0454500BCEDD0 /* DeviceDataSource.swift in Sources */,
+				08C932E91BF14209008F8E4E /* EventPrefix.swift in Sources */,
 				085E0DE11BCF46CD007AB038 /* main.swift in Sources */,
 				08951E101BD2E4260096B4CE /* MasterViewController.swift in Sources */,
 				088234FA1BD06C8C007A5F47 /* WCWRoomTableViewCell.swift in Sources */,
