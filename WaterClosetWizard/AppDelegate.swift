@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let keys : WaterclosetwizardKeys = WaterclosetwizardKeys()
         SparkCloud.sharedInstance().OAuthClientId = keys.oAuthClientId()
         SparkCloud.sharedInstance().OAuthClientSecret = keys.oAuthSecret()
+        SparkCloud.sharedInstance().loginWithUser(keys.particleUser(), password:keys.particlePassword()) { (error) -> Void in
+            if ((error) != nil) {
+                NSLog("Error logging in: \(error)")
+            }
+        }
         
         return true
     }

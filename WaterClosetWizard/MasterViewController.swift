@@ -10,9 +10,20 @@ import UIKit
 
 class MasterViewController : UITableViewController {
     
-    var objects = [WCWRoomEvent]()
     let kWCWEventPrefix = "occupancy-change"
-
+    let dataSource = DeviceDataSource()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource.reloadClosure = { (indexPaths) -> () in
+            self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+        dataSource.insertClosure = { (indexPaths) -> () in
+            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+        self.tableView.dataSource = dataSource
+    }
+    
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
         super.viewWillAppear(animated)
@@ -21,64 +32,33 @@ class MasterViewController : UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        SparkCloud.sharedInstance().subscribeToAllEventsWithPrefix(kWCWEventPrefix) { (event, error) in
-            if (error == nil) {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    let roomEvent : WCWRoomEvent = WCWRoomEvent(sparkEvent: event)
-                    if (self.objects.contains(roomEvent)) {
-                        self.updateObject(roomEvent)
-                    } else {
-                        self.insertNewObject(roomEvent)
+        let keys : WaterclosetwizardKeys = WaterclosetwizardKeys()
+        SparkCloud.sharedInstance().loginWithUser(keys.particleUser(), password:keys.particlePassword()) { (error) -> Void in
+            if ((error) != nil) {
+                NSLog("Error logging in: \(error)")
+            }
+            SparkCloud.sharedInstance().subscribeToAllEventsWithPrefix(self.kWCWEventPrefix) { (event, error) in
+                if (error == nil) {
+                    self.dataSource.parseEvent(event)
+                }
+                else {
+                    NSLog("Error subscribing to events: \(error)")
+                }
+            }
+            
+            SparkCloud.sharedInstance().getDevices { (devices, error) -> Void in
+                if (error == nil) {
+                    for device in devices {
+                        device.getVariable("name", completion: { (deviceName, error) -> Void in
+                            let sparkEvent = SparkEvent(eventDict: ["data":deviceName, "event":self.kWCWEventPrefix])
+                            self.dataSource.parseEvent(sparkEvent)
+                        })
                     }
-                });
+                }
+                else {
+                    NSLog("Error getting device list: \(error)")
+                }
             }
-            else {
-                NSLog("Error occured: %@",error.localizedDescription);
-            }
         }
-    }
-    
-    func insertNewObject(roomEvent: WCWRoomEvent!) {
-        objects.insert(roomEvent, atIndex: 0)
-        let indexPath : NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-    }
-    
-    func updateObject(roomEvent: WCWRoomEvent!) {
-        let roomIndex : Int! = objects.indexOf(roomEvent)
-        if (roomIndex == Int.max) {
-            return;
-        }
-    
-        objects[roomIndex] = roomEvent;
-        let indexPath : NSIndexPath = NSIndexPath(forRow: roomIndex, inSection: 0)
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-    }
-    
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (objects.isEmpty) {
-            return 1;
-        }
-        
-        return objects.count;
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (objects.count <= 0) {
-            return tableView.dequeueReusableCellWithIdentifier("noWizardsCell", forIndexPath: indexPath)
-        }
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! WCWRoomTableViewCell
-    
-        let roomEvent = objects[indexPath.row]
-        cell.textLabel?.text = roomEvent.roomLocation
-        cell.isOccupied = roomEvent.roomOccupied;
-    
-        return cell;
     }
 }

@@ -13,8 +13,13 @@ class WCWRoomEvent : NSObject {
     var roomLocation : String
     
     init(sparkEvent event:SparkEvent) {
-        roomLocation = event.data
-        roomOccupied = event.event.containsString("Occupied")
+        let roomData = event.data.characters.split{$0 == ","}.map(String.init)
+        roomLocation = roomData[0]
+        if (roomData.count > 1) {
+            roomOccupied = roomData[1].containsString("Occupied")
+        } else {
+            roomOccupied = false
+        }
         super.init()
     }
     

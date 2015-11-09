@@ -3,5 +3,7 @@ plugin 'cocoapods-keys', {
     :project => "WaterClosetWizard",
     :keys => [
         "OAuthClientId",
-        "OAuthSecret"
+        "OAuthSecret",
+        "ParticleUser",
+        "ParticlePassword"
     ]}

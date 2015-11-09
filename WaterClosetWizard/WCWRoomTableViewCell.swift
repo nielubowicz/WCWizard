@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WCWRoomTableViewCell : UITableViewCell {
+class WCWRoomTableViewCell : UITableViewCell {
     var isOccupied : Bool = false {
         didSet {
             if (accessoryView == nil) {
