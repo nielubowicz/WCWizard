@@ -15,7 +15,7 @@ class DeviceDataSource : NSObject {
     var insertClosure: ((indexPaths:[NSIndexPath]) -> ())?
  
     func parseEvent(event: SparkEvent!) {
-        let roomEvent : WCWRoomEvent = WCWRoomEvent(sparkEvent: event)
+        let roomEvent = WCWRoomEvent(sparkEvent: event)
         if (objects.contains(roomEvent)) {
             updateObject(roomEvent)
         } else {
@@ -25,7 +25,7 @@ class DeviceDataSource : NSObject {
     
     func insertNewObject(roomEvent: WCWRoomEvent!) {
         objects.insert(roomEvent, atIndex: 0)
-        let indexPath : NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         if (objects.count == 1) {
             reloadClosure?(indexPaths: [indexPath])
         } else {
@@ -34,13 +34,13 @@ class DeviceDataSource : NSObject {
     }
     
     func updateObject(roomEvent: WCWRoomEvent!) {
-        let roomIndex : Int! = objects.indexOf(roomEvent)
+        let roomIndex = objects.indexOf(roomEvent)!
         if (roomIndex == Int.max) {
             return;
         }
         
         objects[roomIndex] = roomEvent;
-        let indexPath : NSIndexPath = NSIndexPath(forRow: roomIndex, inSection: 0)
+        let indexPath = NSIndexPath(forRow: roomIndex, inSection: 0)
         reloadClosure?(indexPaths: [indexPath])
     }
 }
@@ -48,11 +48,11 @@ class DeviceDataSource : NSObject {
 // MARK: UITableViewDataSource methods
 extension DeviceDataSource : UITableViewDataSource {
     
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (objects.isEmpty) {
             return 1;
         }
@@ -60,8 +60,8 @@ extension DeviceDataSource : UITableViewDataSource {
         return objects.count;
     }
     
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (objects.count <= 0) {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (objects.isEmpty) {
             return tableView.dequeueReusableCellWithIdentifier("noWizardsCell", forIndexPath: indexPath)
         }
         

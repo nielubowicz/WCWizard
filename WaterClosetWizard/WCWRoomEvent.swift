@@ -24,7 +24,7 @@ class WCWRoomEvent : NSObject {
     }
     
     override func isEqual(object: AnyObject?) -> Bool {
-        var isEqual: Bool = false
+        var isEqual = false
         if object is WCWRoomEvent {
             let otherObject = object as! WCWRoomEvent
             isEqual = (otherObject.roomLocation == self.roomLocation)

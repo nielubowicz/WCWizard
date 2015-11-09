@@ -10,16 +10,19 @@ import UIKit
 
 class MasterViewController : UITableViewController {
     
-    let kWCWEventPrefix = "occupancy-change"
     let dataSource = DeviceDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.reloadClosure = { (indexPaths) -> () in
-            self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+            dispatch_async(dispatch_get_main_queue(),{
+                self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+            })
         }
         dataSource.insertClosure = { (indexPaths) -> () in
-            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+            dispatch_async(dispatch_get_main_queue(),{
+                self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+            })
         }
         self.tableView.dataSource = dataSource
     }
