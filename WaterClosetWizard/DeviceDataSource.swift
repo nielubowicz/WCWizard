@@ -35,9 +35,7 @@ class DeviceDataSource : NSObject {
     
     func updateObject(roomEvent: WCWRoomEvent!) {
         let roomIndex = objects.indexOf(roomEvent)!
-        if (roomIndex == Int.max) {
-            return;
-        }
+        guard roomIndex < Int.max else { return }
         
         objects[roomIndex] = roomEvent;
         let indexPath = NSIndexPath(forRow: roomIndex, inSection: 0)
@@ -53,17 +51,14 @@ extension DeviceDataSource : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (objects.isEmpty) {
-            return 1;
-        }
+        guard objects.isEmpty == false else { return 1 }
         
         return objects.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (objects.isEmpty) {
-            return tableView.dequeueReusableCellWithIdentifier("noWizardsCell", forIndexPath: indexPath)
-        }
+        guard objects.isEmpty == false
+            else { return tableView.dequeueReusableCellWithIdentifier("noWizardsCell", forIndexPath: indexPath) }
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! WCWRoomTableViewCell
         
