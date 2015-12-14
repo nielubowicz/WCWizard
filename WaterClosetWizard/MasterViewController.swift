@@ -41,33 +41,27 @@ class MasterViewController : UITableViewController {
                 NSLog("Error logging in: \(error)")
             }
             SparkCloud.sharedInstance().subscribeToAllEventsWithEventPrefix(.OccupancyChanged, handler: { (event, error) in
-                if (error == nil) {
-                    NSLog("Event received: \(event)")
-                    self.dataSource.parseEvent(event)
-                }
-                else {
-                    NSLog("Error subscribing to events: \(error)")
-                }
+                guard error == nil else { NSLog("Error subscribing to events: \(error)"); return }
+                
+                NSLog("Event received: \(event)")
+                self.dataSource.parseEvent(event)
             })
             
             SparkCloud.sharedInstance().getDevices { (devices, error) in
-                if (error == nil) {
-                    for device in devices {
-                        device.getVariable("name", completion: { (deviceName, error) in
-                            let sparkEvent = SparkEvent(eventDict: ["data":deviceName, "event": EventPrefix.OccupancyChanged.rawValue])
-                            sparkEvent.deviceID = device.id
-                            device.getVariable("ocupado", completion: { (occupiedValue, error) in
-                                if (occupiedValue.isEqual(1)) {
-                                    sparkEvent.data.appendContentsOf(", Occupied")
-                                }
-                                NSLog("Event created: \(sparkEvent)")
-                                self.dataSource.parseEvent(sparkEvent)
-                            })
+                guard error == nil else { NSLog("Error getting device list: \(error)"); return }
+                
+                for device in devices {
+                    device.getVariable("name", completion: { (deviceName, error) in
+                        let sparkEvent = SparkEvent(eventDict: ["data":deviceName, "event": EventPrefix.OccupancyChanged.rawValue])
+                        sparkEvent.deviceID = device.id
+                        device.getVariable("ocupado", completion: { (occupiedValue, error) in
+                            if (occupiedValue.isEqual(1)) {
+                                sparkEvent.data.appendContentsOf(", Occupied")
+                            }
+                            NSLog("Event created: \(sparkEvent)")
+                            self.dataSource.parseEvent(sparkEvent)
                         })
-                    }
-                }
-                else {
-                    NSLog("Error getting device list: \(error)")
+                    })
                 }
             }
         }
